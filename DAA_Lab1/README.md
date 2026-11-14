@@ -1,78 +1,142 @@
-# Lab Task 2
+Lab Task 1
 
-## Part 1. Trace It Yourself
-Input: [8, 3, 15, 6, 2]
-Output: Largest number = 15, Sorted list = [2, 3, 6, 8, 15]
-Comparisons made: 4
-Dry Run:
-i=1 A[i]=3, max=8, comparisons=1
-i=2 A[i]=15, max=15, comparisons=2
-i=3, A[i]=6, max=15, comparisons=3
-i=4, A[i]=2, max=15, comparisons=4
-Sorting method used: Selection Sort
-Sorting steps:
-Step 1: [2, 3, 15, 6, 8]
-Step 2: [2, 3, 15, 6, 8]
-Step 3: [2, 3, 6, 15, 8]
-Step 4: [2, 3, 6, 8, 15]
-Data structure used: 1D List (Array)
-Growth if input size grew 100x: Finding the max grows proportionally (100x work, O(n)), while sorting grows explosively (10,000x work, O(n^2)).
-Explanation:
-The code assumes the first element is the maximum and scans through the rest of the list one by one, updating max whenever a larger number appears. Because the list is unsorted, every element must be checked at least once so we do not miss the largest value.
+Part 1. Trace It Yourself
 
-## Part 2. Stack or Queue
-Input: Task1, Task2, Task3, Task4, Task5
-Stack order: Task5, Task4, Task3, Task2, Task1
-Queue order: Task1, Task2, Task3, Task4, Task5
-Printer should use: Queue
-Reason: A printer must process jobs in the exact order they were submitted (First-In, First-Out).
-Dry Run:
-Stack (LIFO): push Task1, Task2, Task3, Task4, Task5 then pop in reverse -> Task5, Task4, Task3, Task2, Task1
-Queue (FIFO): enqueue Task1 to Task5 then dequeue in same order -> Task1, Task2, Task3, Task4, Task5
-Data structure used: Stack and Queue (implemented via Python lists)
-Growth if input size grew 100x: Effort grows proportionally (100x) because each task is pushed/enqueued and popped/dequeued once.
-Explanation:
-A printer needs first-come, first-served order so that users who sent documents earlier do not wait behind newer print jobs. A Queue guarantees this behavior because items are removed from the front in the same order they entered from the back.
+Input:
+List = [8, 3, 15, 6, 2]
 
-## Part 3. Build a Small Tree
-Input: Subjects (Math, Science, Physics, Chemistry, Algebra, Geometry)
-Output: Math, Science, Algebra, Geometry, Physics, Chemistry
-Tree Structure:
+Output:
+Largest Number = 15
+Sorted List = [2, 3, 6, 8, 15]
 
-[Root]
-  /    \
-Math    Science
-/  \      /
-
-Alg. Geom. Phys. Chem.
+Comparisons Made:
+4 comparisons to find the largest number.
 
 Dry Run:
-Level 0: Math, Science
-Level 1 under Math: Algebra, Geometry
-Level 1 under Science: Physics, Chemistry
-Level order traversal: Math -> Science -> Algebra -> Geometry -> Physics -> Chemistry
-Data structure used: Tree (Dictionary adjacency list) and Queue for traversal
-Growth if input size grew 100x: Effort grows proportionally (100x) because each node in the tree is visited once.
-Explanation:
-Level-order traversal visits all nodes at the current depth before moving down to the next level. Using a queue ensures that parent nodes discovered first have their children visited in the same left-to-right order.
 
-## Part 4. Count the Steps
-Input: Loop limits n = 5, 10, 20
-Single loop runs: 5 (for n=20, it runs 20 times)
-Nested loop total prints: 25 (for n=10, it runs 100 times)
+- i = 1: Compare 3 with 8. Maximum = 8, comparisons = 1
+- i = 2: Compare 15 with 8. Maximum = 15, comparisons = 2
+- i = 3: Compare 6 with 15. Maximum = 15, comparisons = 3
+- i = 4: Compare 2 with 15. Maximum = 15, comparisons = 4
+
+Sorting Method Used:
+Bubble Sort
+
+Sorting Steps:
+The list is sorted by comparing adjacent elements and swapping them when they are in the wrong order. After each pass, the largest unsorted element moves to its correct position.
+
+Explanation:
+The program checks every element to find the largest number. It then sorts the list using Bubble Sort by comparing and swapping adjacent elements. Finding the maximum takes O(n) time, while Bubble Sort takes O(n²) time in the average and worst cases.
+
+Data Structure Used:
+List (Array-like structure)
+
+Effect of Increasing Input Size:
+If the input size increases 100 times, finding the maximum requires approximately 100 times as many comparisons. Bubble Sort may require approximately 10,000 times as many operations in the worst case.
+
+Part 2. Stack or Queue
+
+Input:
+Task1, Task2, Task3, Task4, Task5
+
+Stack Order:
+Task5, Task4, Task3, Task2, Task1
+
+Queue Order:
+Task1, Task2, Task3, Task4, Task5
+
+Printer Should Use:
+Queue
+
+Reason:
+A printer should process jobs in the order they arrive. A queue follows FIFO (First In, First Out), which guarantees that the earliest task is processed first.
+
 Dry Run:
-Single loop, i=1 to 5, prints 5 times
-Nested loop, i=1 to 5 and j=1 to 5, inner print runs 5 times for each i, total 25 times
-For n=10:
-Single loop runs: 10
-Nested loop runs: 100
-Data structure used: None (simple loop counters)
-Growth if input size grew 100x: The single loop grows proportionally (100x), whereas the nested loop grows explosively (10,000x).
-Explanation:
-The single loop executes once per item, so doubling the input doubles the work (linear O(n) growth). The nested loop runs a full inner loop for every single step of the outer loop, causing total operations to grow quadratically (O(n^2)).
 
-## How to run
-python part1_trace.py
-python part2_stack_queue.py
-python part3_tree.py
-python part4_complexity.py
+- Stack (LIFO): Push Task1 to Task5, then remove them in reverse order.
+- Queue (FIFO): Add Task1 to Task5, then remove them in the same order.
+
+Explanation:
+A stack follows LIFO, meaning the last task added is removed first. A queue follows FIFO, meaning the first task added is removed first. A queue is appropriate for a printer because it processes jobs in arrival order.
+
+Data Structure Used:
+Stack and Queue
+
+Effect of Increasing Input Size:
+If the number of tasks increases 100 times, processing all tasks takes approximately 100 times as many basic operations, assuming each insertion and removal takes O(1) time.
+
+Part 3. Build a Small Tree
+
+Input:
+Subjects: Science, Math, Physics, Chemistry, Algebra, Geometry
+
+Tree Drawing:
+
+Math
+|-- Algebra
+|-- Geometry
+
+Science
+|-- Physics
+|-- Chemistry
+
+Output – Level Order Traversal:
+
+Math, Science, Algebra, Geometry, Physics, Chemistry
+
+Dry Run:
+
+- Level 0: Math, Science
+- Level 1 under Math: Algebra, Geometry
+- Level 1 under Science: Physics, Chemistry
+- Level order traversal: Math, Science, Algebra, Geometry, Physics, Chemistry
+
+Explanation:
+Level order traversal visits nodes level by level, starting from the top level. It visits Math and Science first, followed by their children. A queue is commonly used to implement level order traversal.
+
+Data Structure Used:
+Tree
+
+Effect of Increasing Input Size:
+If the number of nodes increases 100 times, visiting all nodes takes approximately 100 times as much work. Level order traversal takes O(n) time for n nodes.
+
+Part 4. Count the Steps
+
+Input:
+
+- Single loop: i = 1 to 5
+- Single loop: i = 1 to n, where n = 20
+- Nested loops: i = 1 to 5 and j = 1 to 5
+- Nested loops: i = 1 to n and j = 1 to n, where n = 10
+
+Output:
+
+- Single loop runs: 5 times
+- Single loop for n = 20: 20 times
+- Nested loop total prints: 25 times
+- Nested loop for n = 10: 100 times
+
+Dry Run:
+
+- Single loop: The loop runs once for each value from 1 to 5, so it runs 5 times.
+- Single loop for n = 20: The loop runs 20 times.
+- Nested loop: The inner loop runs 5 times for each of the 5 outer-loop iterations. Total = 5 × 5 = 25.
+- Nested loop for n = 10: Total = 10 × 10 = 100.
+
+Explanation:
+A single loop runs n times, so its time complexity is O(n), which is linear. A nested loop with both loops running n times performs n × n operations, so its time complexity is O(n²), which is quadratic.
+
+Data Structure Used:
+Loop variables and counters.
+
+Effect of Increasing Input Size:
+If n increases 100 times, a single loop performs approximately 100 times as many iterations. A nested loop performs approximately 10,000 times as many iterations.
+
+How to Run
+
+Run the following commands from the repository root:
+
+python Lab1/part1_trace.py
+python Lab1/part2_stack_queue.py
+python Lab1/part3_tree.py
+python Lab1/part4_complexity.py
